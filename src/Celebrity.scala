@@ -65,22 +65,22 @@ object Celebrity {
       println("B: " + i)
     }
     if (isCeleb(metrix, canBeCeleb)) {
-      return canBeCeleb + 1;
+      return canBeCeleb + 1
     }
 
-    return 0;
+    return 0
   }
 
   def isCeleb(metrix: Array[Array[Int]], celeb: Int): Boolean = {
     for (i <- 0 until metrix.length) {
       if (metrix(i)(celeb) == 0) {
-        return false;
+        return false
       }
       if (i != celeb && metrix(celeb)(i) == 1) {
         return false
       }
     }
-    return true;
+    return true
   }
 
   def validateMetrix(metrix: Array[Array[Int]]): Boolean = {
