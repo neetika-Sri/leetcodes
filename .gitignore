@@ -11,3 +11,4 @@ out/
 /build.sbt
 /target/
 .idea/vcs.xml
+/.idea/
