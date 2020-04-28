@@ -3,25 +3,31 @@ import scala.collection.mutable
 class CacheMap[K,V](cacheSize: Int)  {
 	var cacheMap = new mutable.LinkedHashMap[K,V]()
 
-	def addElement(key: K, value:V): Unit ={
-		if(cacheMap.size >= cacheSize){
-			removeFirst()
+	def addElement(key: K, value:V): Unit = {
+		cacheMap.synchronized {
+			if (cacheMap.size >= cacheSize) {
+				removeFirst()
+			}
+			cacheMap.put(key, value)
 		}
-		cacheMap.put(key,value)
 	}
 
 	def removeFirst(): Unit = {
 		if(cacheMap.nonEmpty){
-			cacheMap = cacheMap.drop(1)
+			cacheMap.synchronized{
+				cacheMap = cacheMap.drop(1)
+			}
 		}
 	}
 
 	def get(key:K): Option[V] = {
-		val value = cacheMap.remove(key)
-		if(value.isDefined){
-			cacheMap.put(key,value.get)
+		cacheMap.synchronized {
+			val value = cacheMap.remove(key)
+			if (value.isDefined) {
+				cacheMap.put(key, value.get)
+			}
+			value
 		}
-		value
 	}
 
 
@@ -37,7 +43,9 @@ class DBMap[K,V] {
 	var dbMap = new mutable.HashMap[K,V]()
 
 	def add(key: K, value: V): Option[V] ={
-	  dbMap.put(key, value)
+		dbMap.synchronized{
+			dbMap.put(key, value)
+		}
 	}
 
 	def get(key:K) : Option[V] = {
