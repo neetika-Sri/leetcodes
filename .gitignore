@@ -8,3 +8,5 @@
 leetcodes.iml
 out/
 /project/
+/build.sbt
+/target/
