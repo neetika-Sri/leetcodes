@@ -1,9 +1,14 @@
 # Created by .ignore support plugin (hsz.mobi)
-
 .idea/compiler.xml
 .idea/copyright/
 .idea/misc.xml
 .idea/modules.xml
 .idea/workspace.xml
+
 leetcodes.iml
 out/
+/project/
+/build.sbt
+/target/
+.idea/vcs.xml
+/.idea/
